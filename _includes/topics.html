@@ -1,0 +1,38 @@
+{%- comment -%}
+  Rails resources/_topics: topics grouped by category in order of first
+  appearance; topics keep their front-matter order inside each group.
+{%- endcomment -%}
+{%- assign item_topics = include.topics -%}
+{%- if item_topics and item_topics.size > 0 -%}
+{%- assign seen = "" -%}
+{%- for t in item_topics -%}
+  {%- for c in site.data.categories -%}
+    {%- assign hit = c.topics | where: "slug", t | first -%}
+    {%- if hit -%}{%- unless seen contains c.slug -%}{%- capture seen %}{{ seen }}|{{ c.slug }}{% endcapture -%}{%- endunless -%}{%- endif -%}
+  {%- endfor -%}
+{%- endfor -%}
+{%- assign seen_cats = seen | remove_first: "|" | split: "|" -%}
+{%- assign index = 0 %}
+    <div class="topics-wrapper">
+	<div class="topics">
+	    <div class="row">
+		<span class="topics-heading">TOPICS</span>
+		{%- for cs in seen_cats %}
+		{%- assign cat = site.data.categories | where: "slug", cs | first %}
+			<div class="topic">
+			    <a href="/items?category={{ cat.slug }}">{{ cat.name }}</a>
+			</div>
+			{%- for t in item_topics %}
+			{%- assign topic = cat.topics | where: "slug", t | first %}
+			{%- if topic %}
+			    <div class="sub-topic" id="sub-topic-{{ index }}"><a href="/items?topic={{ topic.slug }}">{{ topic.name }}</a>
+			    </div>
+			    {%- assign index = index | plus: 1 %}
+			{%- endif %}
+			{%- endfor %}
+		{%- endfor %}
+	    </div>
+	</div>
+    </div>
+    <!-- topics: [{% for t in item_topics %}{% for c in site.data.categories %}{% assign topic = c.topics | where: "slug", t | first %}{% if topic %}&quot;{{ topic.name }}&quot;{% endif %}{% endfor %}{% unless forloop.last %}, {% endunless %}{% endfor %}] -->
+{%- endif -%}

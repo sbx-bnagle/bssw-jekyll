@@ -1,0 +1,121 @@
+---
+layout: default
+---
+{%- comment -%} Rails blog_posts/show {%- endcomment -%}
+<div class="main post-event-hero single-post-hero">
+    <div class="container">
+	<div class="row">
+	    <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
+		<div class="page-heading">
+		    <div class="row">
+			<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+			    {% include breadcrumbs.html parent_name="Blog" parent_url="/blog_posts" %}
+			</div>
+		    </div>
+		    <h1>{{ page.title }}</h1>
+		    {% include share.html %}
+		</div>
+	    </div>
+	    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+{%- if page.hero_image %}
+    <div class="container blog-image-container">
+	<div class='image-wrapper' style='background-image:url({{ page.hero_image | relative_url }}); '></div>
+	<div class="row">
+	    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+		<p class='caption'>
+		    {{ page.hero_image_caption }}</p>
+	    </div>
+	</div>
+    </div>
+{%- else %}
+	<div class="row">
+	    <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
+		<div class="post-content">
+		    <p>{{ page.deck | markdownify | strip }}</p>
+		</div>
+	    </div>
+    </div>
+{%- endif %}
+	    </div>
+<div class="container blog-meta">
+    <div class="row">
+	<div class="col-xl-3">
+	    <div class="row">
+		<div class="col-xl-12">
+		    <div class="small-caps"><strong>Published</strong>{{ page.date | date: "%b %d, %Y" }}</div>
+		</div>
+	    </div>
+	</div>
+	<div class="col-xl-3">
+	    <div class="row">
+		<div class="col-xl-12">
+		    <div class="small-caps">
+			<strong>
+			    Author{% if page.authors.size > 1 %}s{% endif %}</strong>
+			{% include author_list.html authors=page.authors %}
+		    </div>
+		</div>			    
+	    </div>
+	</div>
+	<div class="col-xl-6">
+	    {% include topics.html topics=page.topics %}
+	</div>
+    </div>
+    {%- if page.tracks and page.tracks.size > 0 %}
+	<div class="row">
+	    <div class="col-xl-6">
+		<div class="small-caps">
+		    <strong>Track</strong>
+		    {% for t in page.tracks %}{% assign track = site.data.tracks | where: "slug", t | first %}<a href="/blog_posts?track={{ t }}">{{ track.name | default: t }}</a>{% if forloop.length == 2 and forloop.first %} and {% elsif forloop.length > 2 and forloop.rindex == 2 %}, and {% elsif forloop.rindex > 2 %}, {% endif %}{% endfor %}
+		</div>
+	    </div>
+	</div>
+    {%- endif %}
+</div>
+	</div>
+    </div>
+</div>
+<div class="page-content post-event-content">
+    <div class="container">
+	<div class='row'>
+	    <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
+		<div class="content">
+		    {%- if page.hero_image %}
+			<p>{{ page.deck | markdownify | strip }}</p>
+			{%- comment -%} Rails leaves the emptied "**Hero Image:**" paragraph and list behind; kept for identical spacing. {%- endcomment %}
+			<p></p>
+			<ul>
+			</ul>
+		    {%- endif %}
+		    {{ content }}
+		</div>
+	    </div>
+	</div>
+    </div>
+</div>
+{%- comment -%}
+  Related posts: Rails picks posts sharing a topic. Here: other posts that
+  share at least one topic, newest first, max 5.
+{%- endcomment -%}
+{%- assign related = "" | split: "" -%}
+{%- for post in site.posts -%}
+  {%- if post.url != page.url -%}
+    {%- for t in page.topics -%}
+      {%- if post.topics contains t -%}{%- assign related = related | push: post -%}{%- break -%}{%- endif -%}
+    {%- endfor -%}
+  {%- endif -%}
+{%- endfor %}
+<div class="blog-post-footer">
+    {%- if related.size > 0 %}
+	<div class="container">
+	    <div class="row">
+		<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+		    <h1>More on {% for t in page.topics %}{% for c in site.data.categories %}{% assign topic = c.topics | where: "slug", t | first %}{% if topic %}{{ topic.name }}{% endif %}{% endfor %}{% if forloop.length == 2 and forloop.first %} and {% elsif forloop.length > 2 and forloop.rindex == 2 %}, and {% elsif forloop.rindex > 2 %}, {% endif %}{% endfor %}</h1>
+		</div>
+	    </div>
+	</div>
+	{%- for post in related limit: 5 %}
+	    {% include post_row.html post=post %}
+	{%- endfor %}
+    {%- endif %}
+</div>

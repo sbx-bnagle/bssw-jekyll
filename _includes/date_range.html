@@ -1,0 +1,10 @@
+{%- comment -%} Rails date_range: "%b %e, %Y"; same year -> "Nov 15&ndash;20, 2026" / "Nov 30&ndash;Dec  2, 2026". {%- endcomment -%}
+{%- assign s = include.start -%}{%- assign e = include.end -%}
+{%- assign sd = s | date: "%Y-%m-%d" -%}{%- assign ed = e | date: "%Y-%m-%d" -%}
+{%- if e == nil or sd == ed -%}{{ s | date: "%b %e, %Y" }}
+{%- else -%}
+{%- assign sy = s | date: "%Y" -%}{%- assign ey = e | date: "%Y" -%}{%- assign sm = s | date: "%m" -%}{%- assign em = e | date: "%m" -%}
+{%- if sy == ey %}{{ s | date: "%b %e" }}{% else %}{{ s | date: "%b %e, %Y" }}{% endif -%}
+&ndash;
+{%- if sm == em and sy == ey %}{{ e | date: "%-d, %Y" }}{% else %}{{ e | date: "%b %e, %Y" }}{% endif -%}
+{%- endif -%}

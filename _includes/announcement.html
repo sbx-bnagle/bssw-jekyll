@@ -1,0 +1,27 @@
+{%- comment -%}
+  Site-wide announcement bar (Site/Announcements/Announcements.md in the
+  legacy repo). Shown when the build date falls inside the display window;
+  the bundle's cookie logic hides it after the visitor closes it.
+{%- endcomment -%}
+{%- assign a = site.data.announcement -%}
+{%- if a and a.text -%}
+{%- assign now = site.time | date: "%Y-%m-%d" -%}
+{%- assign starts = a.start | date: "%Y-%m-%d" -%}
+{%- assign ends = a.end | date: "%Y-%m-%d" -%}
+{%- if now >= starts and now <= ends %}
+	    <div class="announcement" id="announcement">
+		<div class="container">
+		    <div class="row">
+			<div class="col-xl-11 col-lg-11 col-md-11 col-sm-11 col-11">
+
+			    <a href="{{ a.url }}">{{ a.text }}</a>
+
+			</div>
+			<div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1">
+			    <button class="announcements-close" id="close" aria-label="Close" onClick="cookieHide();"><i class="fa fa-times" aria-hidden="true"></i></button>
+			</div>
+		    </div>
+		</div>
+	    </div>
+{%- endif -%}
+{%- endif -%}

@@ -1,0 +1,55 @@
+---
+layout: listing
+title: Resources
+permalink: /items/
+listing: items
+---
+{%- comment -%}
+  Rails resources#index. This static render is the unfiltered "All Resources"
+  view; listing.js re-renders for ?topic= ?category= ?recent= ?author=.
+{%- endcomment -%}
+{%- assign all_docs = site.posts | concat: site.items | concat: site.events -%}
+{%- assign pinned = all_docs | where: "pinned", true | sort_natural: "title" -%}
+{%- assign rest = all_docs | where_exp: "d", "d.pinned != true" | sort_natural: "title" -%}
+{%- assign rows = pinned | concat: rest -%}
+<div id="bssw-listing">
+<div class="container">
+    <div class="row">
+	<div class="main all_resources_page" >
+	    <div class="container">
+		<div class="row">
+		    <div class="col-xl-9 col-lg-9 col-md-9 col-sm-12 col-12">
+			    <div class="page-heading all"> 
+				<div class="breadcrumbs">
+				    <ul>
+					<li><a href="/">Home</a></li>
+					<li><a href="/items">Resources</a></li>
+				    </ul>
+				</div>
+				    <h1 class="all_resources">All Resources</h1>
+			    </div>
+			    <div id='resources' >
+<div>
+  <div class="pagination pagination-top col-md-12">
+  1-{{ rows.size }} of {{ rows.size }} Items
+  </div>
+</div>
+<div class="resources">
+  {%- for r in rows %}
+      {% include resource_row.html item=r %}
+  {%- endfor %}
+</div>
+<div>
+  <div class="pagination pagination-bottom col-md-12">
+  1-{{ rows.size }} of {{ rows.size }} Items
+  </div>
+</div>
+			    </div>
+		    </div>
+			{% include sidebar.html %}
+		</div>
+	    </div>
+	</div>    
+    </div>
+</div>
+</div>

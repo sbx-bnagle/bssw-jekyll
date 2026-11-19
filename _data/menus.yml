@@ -1,0 +1,15 @@
+# Hero sub-menus (Rails Page.orientation / Page.fellows / Page.contribute).
+# `pages` are site_pages slugs in display order; `extra` pages show the menu
+# without being in it; `labels` override link text.
+- id: orientation
+  pages: [communities-overview, intro-to-cse, intro-to-hpc]
+  extra: [better-scientific-software-bssw]
+- pages: [bssw-fellowship-program, apply-for-the-bssw-fellowship-program, meet-our-fellows, bssw-fellowship-faq]
+  labels:
+    bssw-fellowship-program: Fellowships Overview
+    apply-for-the-bssw-fellowship-program: Apply
+- pages: [what-to-contribute-content-for-better-scientific-software, how-to-contribute-content-to-better-scientific-software, questions-about-contributing-to-better-scientific-software]
+  labels:
+    what-to-contribute-content-for-better-scientific-software: What To Contribute
+    how-to-contribute-content-to-better-scientific-software: How To Contribute
+    questions-about-contributing-to-better-scientific-software: Questions? Contact Us

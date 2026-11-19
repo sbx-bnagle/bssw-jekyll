@@ -1,0 +1,15 @@
+{%- comment -%}
+  Rails layouts/_breadcrumbs. include.parent_name / include.parent_url set the
+  middle crumb (default: Resources).
+{%- endcomment -%}
+<div class="breadcrumbs">
+    <ul>
+	<li><a href="/">Home</a></li>
+	{%- if include.parent_url %}
+	    <li><a href="{{ include.parent_url }}">{{ include.parent_name }}</a></li>{{ include.parent_trailing }}
+	{%- else %}
+	    <li><a href="/items">Resources</a></li>
+	{%- endif %}
+	<li class="active">        {{ page.title | rails_crumb }}</li>
+    </ul>
+</div>

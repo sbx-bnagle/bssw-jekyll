@@ -1,0 +1,93 @@
+---
+layout: default
+title: Better Scientific Software (BSSw)
+show_quote: true
+---
+{%- comment -%} Rails pages#show id=homepage -> pages/_page + pages/_home {%- endcomment -%}
+{%- assign home = site.site_pages | where: "slug", "better-scientific-software-bssw" | first -%}
+{%- assign page_deck = home.deck -%}
+{% include hero.html page=home %}
+    <div class='page-content
+		 home-content'>
+	<div class='container'>
+	    <div class='row'>
+		<div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
+		    <div class='content '>
+			{{ home.content }}
+		    </div>
+		</div>
+	    </div>
+	</div>
+    </div>
+    <div class="featured bg-white">
+	<div class="container featured-container">
+	    <div class="owl-carousel owl-theme">
+		{%- for slide in site.data.homepage.featured %}
+			<div class="row">
+			    <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12">
+				<h3>Featured</h3>
+			    </div>
+		    {%- for ref in slide %}
+		    {%- include find_doc.html url=ref %}
+		    <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12">
+			{%- if found_doc %}
+			    <div class="featured-inner">
+				<h3>
+				    <a href="/items/{{ found_doc.slug }}">{{ found_doc.title | escape }}</a>
+				</h3>
+				<p>				    {{ found_doc.item_type }}
+				</p>
+			    </div>
+			{%- endif %}
+		    </div>
+		    {%- endfor %}
+			</div><!-- /row -->
+		{%- endfor %}
+	    </div>
+
+<div class='latest'><a href="/items?recent=true">Latest Resources</a></div>
+</div>
+</div>
+    <div class="tools bg-white">
+	<div class="container tools-container">
+	    <div class="row tools-row">
+		<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+		    <h2>Resources for Developer Productivity and Software Sustainability</h2>
+		</div>
+		<div class="col-xl-4 offset-xl-2 col-lg-4 offset-lg-2 col-md-12 col-sm-12 col-12">
+		    <img src="/assets/diagram.png" alt="Diagram" class="img-fluid" />
+		</div>
+	    </div>
+
+	    {%- for category in site.data.categories %}
+	    {%- assign cat = category.name | split: " " %}
+	    <div class="row tool-row">
+		<div class="col-xl-7 col-lg-7 col-md-12 col-sm-12 col-12">
+		    <div class="tool-link">
+			<div class="circle">
+			    <i class="fas fa-angle-right"></i>
+			</div>
+			<h3><a href="/items?category={{ category.slug }}">{{ cat.first }}</a></h3>
+			<h2><a href="/items?category={{ category.slug }}">{{ cat.last }}</a></h2>
+			<div class="tool-content"><p> {{ category.homepage }}  </p></div>
+		    </div>
+		</div>
+		<div class="col-xl-4 offset-xl-1 col-lg-4 offset-lg-1 col-md-12 col-sm-12 col-12">
+		    <ul class="caret-list">
+			{%- for topic in category.topics %}
+			    <li><a href="/items?topic={{ topic.slug }}">{{ topic.name }}</a></li>
+			{%- endfor %}
+		    </ul>
+		</div>
+	    </div>
+	    {%- endfor %}
+
+<div class="row tool-row tool-row-last">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+	<a href="/items?page=1&view=all" class="circle-icon-cta"><span class="circle circle-white"><i class="fas fa-angle-right"></i></span>View All Resources</a>
+    </div>
+</div>
+
+	</div>
+    </div>
+    </div>

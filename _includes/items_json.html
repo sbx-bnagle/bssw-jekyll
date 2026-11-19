@@ -1,0 +1,8 @@
+{%- comment -%}
+  Listing data for assets/js/listing.js and the contributor editor:
+  every post, resource and event with the fields the Rails listings use.
+{%- endcomment -%}
+{%- assign all_docs = site.posts | concat: site.items | concat: site.events -%}
+[{%- for d in all_docs -%}
+{"slug":{{ d.slug | jsonify }},"title":{{ d.title | jsonify }},"url":{{ d.url | jsonify }},"type":{{ d.item_type | jsonify }},"date":{{ d.date | date: "%Y-%m-%d" | jsonify }},"pinned":{{ d.pinned | default: false | jsonify }},"topics":{{ d.topics | default: empty | jsonify }},"authors":{{ d.authors | default: empty | jsonify }},"tracks":{{ d.tracks | default: empty | jsonify }},"dates":{{ d.dates | default: empty | jsonify }}}{% unless forloop.last %},{% endunless %}
+{%- endfor -%}]

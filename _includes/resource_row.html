@@ -1,0 +1,55 @@
+{%- comment -%}
+  Rails resources/_listing. Variants: default (topics), include.community
+  ("Topics " label), include.recent (date / type / topics columns).
+{%- endcomment -%}
+{%- assign r = include.item -%}
+  <div class="resource">
+    <div class="container">
+      <a href="{{ "/items/" | append: r.slug | absolute_url }}">
+	<div class="row">
+          <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            {%- if r.pinned and include.recent != true %}
+              <span class="recommended"><span class="dot"></span> Recommended</span>
+            {%- endif %}
+            <div class="row">
+              <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+		<h3>{{ r.title }}</h3>
+              </div>
+            </div>
+            <div class="row">
+	      {%- if include.recent %}
+		<div class='col-3'>
+		  <p class="small-caps">
+		    {{ r.date | date: "%B %-d, %Y" }}
+		  </p>
+		</div>
+	        <div class="col-3">
+		  <p class="small-caps">
+		    <strong>Type of Item</strong>
+		    {{ r.item_type }}
+		  </p>
+		</div>
+		<div class='col-6	'>
+		  <p class="small-caps">
+		    <strong>Topics:</strong>
+		    {% include topic_list.html topics=r.topics %}
+		  </p>
+		</div>
+	      {%- else %}
+		<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+		  <p class="topics small-caps">
+                    {%- if include.community %}
+                      <strong>Topics </strong>
+                    {%- else %}
+                      <strong>&nbsp; </strong>
+                    {%- endif %}
+		    {% include topic_list.html topics=r.topics %}
+		  </p>
+		</div>
+	      {%- endif %}
+            </div>
+          </div>
+	</div>
+      </a>
+    </div>
+  </div>

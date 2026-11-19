@@ -1,0 +1,81 @@
+---
+layout: default
+title: Search
+permalink: /items/search
+wide_footer: true
+scripts: [/assets/js/listing.js]
+---
+{%- comment -%}
+  Rails resources#search (Algolia). Static replacement: listing.js searches
+  the inline index below. Swap for Pagefind/Algolia when the corpus is full size.
+{%- endcomment -%}
+<div class="row hero-row hero-search">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-9">
+	<h1>Search </h1>
+	<div class="deck">
+	    <p>No results found </p>
+	</div>
+      </div>
+    </div>
+    <div class="row search-form-row">
+      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+	<form class="search-page-form" role="search" method="get" action="/items/search">
+	  <div class="input-group">
+	    <input type="text" class="form-control" placeholder="Search" name="search_string" value="">
+	    <div class="input-group-btn">
+	      <button class="btn" type="submit"><i class="fa fa-search fa-flip-horizontal"></i></button>
+	    </div>
+	  </div>
+	</form>
+      </div>
+    </div>
+    <div class='search_instruction'>Use quotes to search phrases and exact spellings.</div>
+  </div>
+</div>
+<div class="container">
+    <div class="row">
+	<div class="main " >
+	    <div class="container">
+		<div class="row">
+		    <div class="col-xl-9 col-lg-9 col-md-9 col-sm-12 col-12">
+			    </div>
+			    <div id='resources' class='container'>
+<div>
+  <div class="pagination pagination-top col-md-12">
+  </div>
+</div>
+<div class="resources">
+</div>
+<div>
+  <div class="pagination pagination-bottom col-md-12">
+  </div>
+</div>
+				    <div class="posts-list to-top-after-load">
+					<div class="container">
+					    <div class="row">
+						<div class="col-xl-12 col-lg-12 col-nd-12 col-sm-12 col-12">
+						    <a class="to-top" href="#top">To Top</a>
+						</div>
+					    </div>
+					</div>
+				    </div>
+			    </div>
+		</div>
+	    </div>
+	</div>    
+	    <div class="posts-list to-top-after-load">
+		<div class="container">
+		    <div class="row">
+			<div class="col-xl-12 col-lg-12 col-nd-12 col-sm-12 col-12">
+			    <a class="to-top" href="#top">To Top</a>
+			</div>
+		    </div>
+		</div>
+	    </div>
+    </div>
+</div>
+{%- assign all_docs = site.posts | concat: site.items | concat: site.events -%}
+<script type="application/json" id="bssw-data">{"items":[{% for d in all_docs %}{"slug":{{ d.slug | jsonify }},"title":{{ d.title | jsonify }},"type":{{ d.item_type | jsonify }},"date":{{ d.date | date: "%Y-%m-%d" | jsonify }},"topics":{{ d.topics | default: empty | jsonify }},"authors":{{ d.authors | default: empty | jsonify }},"tracks":{{ d.tracks | default: empty | jsonify }},"location":{{ d.location | jsonify }},"organizers":{{ d.organizers | jsonify }},"text":{{ d.deck | append: " " | append: d.content | strip_html | normalize_whitespace | jsonify }}}{% unless forloop.last %},{% endunless %}{% endfor %}],"authors":{{ site.data.authors | jsonify }},"categories":{{ site.data.categories | jsonify }},"tracks":{{ site.data.tracks | jsonify }}}</script>
+<script>document.body.setAttribute('data-listing', 'search');</script>

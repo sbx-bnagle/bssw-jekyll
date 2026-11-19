@@ -1,0 +1,77 @@
+title: Better Scientific Software
+description: >-
+  Better Scientific Software (BSSw) provides a central hub for the community to
+  address pressing challenges in software productivity, quality, and sustainability.
+url: "https://bssw.io"
+baseurl: ""
+
+# Repository the content lives in. The contributor editor reads/writes
+# Markdown here through the GitHub API (see docs/EDITOR_INTEGRATION.md).
+repository: betterscientificsoftware/bssw.io
+content_branch: main
+
+# Static replacement for the Rails /contacts endpoint (Formspree, Netlify
+# Forms, a Cloudflare Worker, etc.). Empty = the form renders but posts nowhere.
+contact_form_action: ""
+
+markdown: BSSWMarkdown
+highlighter: rouge
+
+sass:
+  style: compressed
+  quiet_deps: true
+  silence_deprecations: [import, global-builtin, slash-div, color-functions]
+
+permalink: none
+
+collections:
+  items:            # Curated content ("Resources")
+    output: true
+    permalink: /items/:slug
+  events:
+    output: true
+    permalink: /events/:slug
+  site_pages:       # Site/*.md in the legacy content repo
+    output: true
+    permalink: /pages/:slug
+  communities:
+    output: true
+    permalink: /communities/:slug
+  fellows:
+    output: true
+    permalink: /fellows/:slug
+
+defaults:
+  - scope: { path: "", type: posts }
+    values: { layout: blog_post, permalink: "/blog_posts/:slug", item_type: Blog Post }
+  - scope: { path: "", type: drafts }
+    values: { layout: blog_post, permalink: "/blog_posts/:slug", item_type: Blog Post }
+  - scope: { path: "", type: items }
+    values: { layout: resource, item_type: Resource }
+  - scope: { path: "", type: events }
+    values: { layout: event, item_type: Event }
+  - scope: { path: "", type: site_pages }
+    values: { layout: page }
+  - scope: { path: "", type: communities }
+    values: { layout: community }
+  - scope: { path: "", type: fellows }
+    values: { layout: fellow }
+
+plugins:
+  - jekyll-redirect-from
+
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - docs/
+  - scripts/
+  - vendor/
+  - .github/
+  - .jekyll-cache/
+
+# Origins allowed to drive /preview/blog-post via postMessage (the
+# contributor editor). Keep the editor on its own origin; see
+# docs/EDITOR_INTEGRATION.md.
+preview_allowed_origins:
+  - http://localhost:5173

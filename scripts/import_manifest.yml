@@ -1,0 +1,60 @@
+# Legacy files (paths in betterscientificsoftware/bssw.io) to import.
+# Prototype rule: 5 entries per repeated content type.
+files:
+  # Blog posts (all five appear in the homepage carousel)
+  - Articles/Blog/2026-09-issues-as-source-code.md
+  - Articles/Blog/2026-10-irsc.md
+  - Articles/Blog/2026-09-reproducibility-check.md
+  - Articles/Blog/2026-09-bsswf-pearc26.md
+  - Articles/Blog/2026-09-BSSwFellowsOpen2026.md
+  # Resources (curated content + "What Is" articles; last three are pinned;
+  # HowToConfigureSw is featured on the Scientific Libraries community page)
+  - CuratedContent/HowClaudeCodeTeamDoesCodeReview.md
+  - CuratedContent/Tips-Making-SW-Outlive-Job.md
+  - Articles/WhatIs/WhatIsPeerCodeReview.md
+  - Articles/WhatIs/WhatIsCseSwTesting.md
+  - CuratedContent/HowToConfigureSw.md
+  # Events (two upcoming, three past as of Nov 2026)
+  - Events/2026-11-sc26-sw-events.md
+  - Events/2026-11-genai-research-software-testing-survey.md
+  - Events/2026-usrse-conf.md
+  - Events/2026-09-irsc.md
+  - Events/hirse-057-2026-10.md
+  # Communities
+  - Site/Communities/ScientificLibraries.md
+  - Site/Communities/SoftwareEngineering.md
+  - Site/Communities/ExascaleComputing.md
+  - Site/Communities/SupercomputerFacilities.md
+  - Site/Communities/ComputationalMolecular.md
+  # Fellows (2026 class)
+  - Site/BSSwFellowshipProgram/People/2026-F-Bludau.md
+  - Site/BSSwFellowshipProgram/People/2026-F-Goldman.md
+  - Site/BSSwFellowshipProgram/People/2026-F-Paine.md
+  - Site/BSSwFellowshipProgram/People/2026-F-Sinha.md
+  - Site/BSSwFellowshipProgram/People/2026-F-Weeks.md
+  # Site pages (not repeated content; everything linked from nav/footer/menus)
+  - Site/Homepage.md
+  - Site/Resources.md
+  - Site/Blog.md
+  - Site/EventsUpcoming.md
+  - Site/EventsPast.md
+  - Site/Contributors.md
+  - Site/Contact.md
+  - Site/About.md
+  - Site/SiteOverview.md
+  - Site/Policies.md
+  - Site/CommunitiesOverview.md
+  - Site/IntroToCse.md
+  - Site/IntroToHpc.md
+  - Site/EmailRegistration.md
+  - Site/WhatToContribute.md
+  - Site/HowToContribute.md
+  - Site/QuestionsAboutContributing.md
+  - Site/BSSwFellowshipProgram/FellowshipsOverview.md
+  - Site/BSSwFellowshipProgram/FellowshipsApply.md
+  - Site/BSSwFellowshipProgram/MeetFellows.md
+  - Site/BSSwFellowshipProgram/FellowsFAQ.md
+images:
+  - People_BSSwContributor.png
+  - Logo_DOE_Unofficial_Sm.png
+  - Logo_NSF_4ColorB_Sm.png

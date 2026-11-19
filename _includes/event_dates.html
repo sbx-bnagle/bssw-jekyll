@@ -1,0 +1,14 @@
+{%- comment -%}
+  Rails ApplicationHelper#show_dates: standard "Event Date(s)" first as
+  "<strong> Event Dates</strong><br />Nov 15&ndash;20, 2026", then additional
+  dates as "<strong>Label</strong>Date"; entries joined with <br />.
+{%- endcomment -%}
+{%- assign std = include.event.dates | where_exp: "d", "d.label contains 'Event Date'" -%}
+{%- assign extra = "" | split: "" -%}
+{%- for d in include.event.dates -%}{%- unless d.label contains "Event Date" -%}{%- assign extra = extra | push: d -%}{%- endunless -%}{%- endfor -%}
+{%- assign ordered = std | concat: extra -%}
+{%- for d in ordered -%}
+{%- if forloop.index0 > 0 %}<br />{% endif -%}
+{%- if d.label contains "Event Date" -%}<strong> {{ d.label }}</strong><br />{%- else -%}<strong>{{ d.label }}</strong>{%- endif -%}
+{%- include date_range.html start=d.start end=d.end -%}
+{%- endfor -%}

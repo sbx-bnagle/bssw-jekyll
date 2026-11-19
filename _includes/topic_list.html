@@ -1,0 +1,2 @@
+{%- comment -%}Rails SiteItem#topic_list: topic names joined by ", ".{%- endcomment -%}
+{%- for t in include.topics -%}{%- for c in site.data.categories -%}{%- assign topic = c.topics | where: "slug", t | first -%}{%- if topic -%}{{ topic.name }}{%- endif -%}{%- endfor -%}{%- unless forloop.last %}, {% endunless -%}{%- endfor -%}

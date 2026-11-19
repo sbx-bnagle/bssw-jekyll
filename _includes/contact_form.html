@@ -1,0 +1,74 @@
+{%- comment -%}
+  Rails contacts/new (include.contribute=false) and contributes/_new
+  (include.contribute=true). Posts to site.contact_form_action; the honeypot
+  field mirrors invisible_captcha.
+{%- endcomment -%}
+{%- if include.contribute %}
+<div class='row contributions'>
+	<div class='container'>
+		<div class="row">
+			<div class="col-xl-10 col-lg-10 col-md-12 col-sm-12 col-12">
+	    <form class="simple_form new_contribute" id="new_contribute" novalidate="novalidate" action="{{ site.contact_form_action }}" accept-charset="UTF-8" method="post">
+	    	<div class='row'>
+				<div class='col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12'>
+		  			<div class='input'>
+	      				<label>Select the Nature of Your Question</label>
+		    			<select name="contribute[reason]" id="contribute_reason"><option value="I need more information on contributing">I need more information on contributing</option>
+<option value="I am facing problems contributing">I am facing problems contributing</option>
+<option value="I have a suggestion">I have a suggestion</option>
+<option value="Other">Other</option></select>
+		  			</div>
+		  			<div class="input text optional contribute_message"><label class="text optional" for="contribute_message">Message</label><textarea class="text optional" name="contribute[message]" id="contribute_message">
+</textarea></div>
+				</div>
+				<div class='col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12'>
+		  			<div class="input string required contribute_name"><label class="string required" for="contribute_name"><abbr title="required">*</abbr> Full Name</label><input class="string required" required="required" aria-required="true" type="text" name="contribute[name]" id="contribute_name" /></div>
+		  			<div class="input email required contribute_email"><label class="email required" for="contribute_email"><abbr title="required">*</abbr> Email</label><input class="string email required" required="required" aria-required="true" type="email" name="contribute[email]" id="contribute_email" /></div>
+		  			<div class="bsswhp"><style media="screen">.bsswhp {display:none;}</style><label for="bsswhp">If you are a human, ignore this field</label><input type="text" name="_gotcha" id="bsswhp" autocomplete="off" tabindex="-1" /></div>
+		  			<div style="clear:both;"></div>
+				</div>
+	      	</div>
+	     	<div class='row'>
+				<div class='col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12'>
+					<input type="submit" name="commit" value="Send Question" class="btn captcha-btn-fix" data-disable-with="Send Question" /></div>
+	      		</div>
+	    </form>
+</div></div>
+	</div>
+</div>
+{%- else %}
+<div class="contact-container">
+  <div class='row form-row -contact'>
+    <div class='container'>
+      <div class="page-content">
+	<h2>Email Contact Form </h2>
+	<form class="simple_form new_contact_form" id="new_contact_form" novalidate="novalidate" action="{{ site.contact_form_action }}" accept-charset="UTF-8" method="post">
+	  <div class='row'>
+	    <div class='col-md-6'>
+	      <div class='form-group input select'>
+		<label>Select Reason for Contacting BSSw </label>
+		<select name="contact_form[reason]" id="contact_form_reason"><option value="I have a question about the website">I have a question about the website</option>
+<option value="I have a question about BSSw">I have a question about BSSw</option>
+<option value="I have a comment">I have a comment</option>
+<option value="I have a suggestion for the site">I have a suggestion for the site</option>
+<option value="I have a question about the BSSw Fellowship">I have a question about the BSSw Fellowship</option>
+<option value="I want to contribute to the site">I want to contribute to the site</option></select>
+	      </div>
+	      <div class="input text optional contact_form_message"><label class="text optional" for="contact_form_message">Message</label><textarea class="text optional" name="contact_form[message]" id="contact_form_message">
+</textarea></div>
+	    </div>
+	    <div class='col-md-6'>
+	      <div class="input string required contact_form_name"><label class="string required" for="contact_form_name">(Required) Full Name</label><input class="string required" required="required" type="text" name="contact_form[name]" id="contact_form_name" /></div>
+	      <div class="input email required contact_form_email"><label class="email required" for="contact_form_email">(Required) Email</label><input class="string email required" required="required" type="email" name="contact_form[email]" id="contact_form_email" /></div>
+	      <div class="bsswhp"><style media="screen">.bsswhp {display:none;}</style><label for="bsswhp">If you are a human, ignore this field</label><input type="text" name="_gotcha" id="bsswhp" autocomplete="off" tabindex="-1" /></div>
+	      <span class="help-block pull-left" style="color:#a94442;"></span>
+	    </div>
+	  </div>
+	  <div class='row'>
+	    <div class='col-md-12'><input type="submit" name="commit" value="Send Message" class="btn captcha-btn-fix" data-disable-with="Send Message" /></div>
+	  </div>
+	</form>  </div>
+    </div>
+  </div>
+</div>
+{%- endif %}

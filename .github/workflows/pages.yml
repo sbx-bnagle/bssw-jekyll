@@ -1,0 +1,62 @@
+# Build with Jekyll 4 + the plugins in _plugins/ and deploy to GitHub Pages.
+# The daily run keeps date-driven output current (upcoming vs. past events,
+# announcement window, homepage quote).
+#
+# For the GitHub Pages prototype the site URL and base path come from
+# actions/configure-pages, and pages are marked noindex so this copy doesn't
+# compete with bssw.io in search results. Remove PAGES_NOINDEX for production.
+name: Build and deploy
+
+on:
+  push:
+    branches: [main]
+  schedule:
+    - cron: "15 5 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+env:
+  PAGES_NOINDEX: "true"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.3"
+          bundler-cache: true
+      - id: pages
+        uses: actions/configure-pages@v5
+      - name: Write Pages config override
+        run: |
+          {
+            echo "url: \"${{ steps.pages.outputs.origin }}\""
+            echo "baseurl: \"${{ steps.pages.outputs.base_path }}\""
+            echo "noindex: ${PAGES_NOINDEX}"
+          } > _config.pages.yml
+          cat _config.pages.yml
+      - name: Build
+        run: bundle exec jekyll build --config _config.yml,_config.pages.yml
+        env:
+          JEKYLL_ENV: production
+      - uses: actions/upload-pages-artifact@v3
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

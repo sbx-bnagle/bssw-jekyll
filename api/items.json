@@ -1,0 +1,9 @@
+---
+layout: null
+permalink: /api/items.json
+---
+{%- comment -%}
+  Every listable document. Used by listing.js-style clients and by the
+  contributor editor (duplicate-title checks, related-content pickers).
+{%- endcomment -%}
+{% include items_json.html %}

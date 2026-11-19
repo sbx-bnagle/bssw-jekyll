@@ -1,0 +1,73 @@
+{%- comment -%} Rails pages/_fellows: fellows grouped by class year, then Fellows / Honorable Mentions. {%- endcomment -%}
+<div class="page-content">
+<style>
+	     .page-content {
+		 padding-top: 0;
+		 	 }
+	    </style>
+	    <div class="limiter">
+		{%- assign by_year = site.fellows | group_by: "year" | sort: "name" | reverse %}
+		{%- for year in by_year %}
+			<div class="class-year">
+			    <div class="container">
+				<div class="row">
+				    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+					<h2 id="{{ year.name }}-class">{{ year.name }} Class</h2>
+				    </div>
+				</div>
+				{%- assign groups = year.items | group_by: "honorable_mention" | sort: "name" %}
+				{%- for g in groups %}
+				{%- assign hm = false %}{% if g.name == "true" %}{% assign hm = true %}{% endif %}
+				    <div class="row">
+					<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+					    <h3 id='{% if hm %}{{ year.name }}-honorable-mentions{% else %}{{ year.name }}-fellows{% endif %}' class="mb-2">{% if hm %}Honorable Mentions{% else %}Fellows{% endif %}</h3>
+					</div>
+				    </div>
+				    <div class="row">
+					{%- assign people = g.items | sort: "last_name" %}
+					{%- for fellow in people %}
+					    <div class='col-xl-3 col-lg-3 col-md-6 col-sm-6 col-12'>
+						<div class="author-col">
+						    {%- if fellow.image %}
+							<div class="author-photo" style="background:url('{{ fellow.image | relative_url }}') no-repeat center center;">
+							</div>
+						    {%- endif %}
+						    {%- if hm %}
+							<h3>{{ fellow.title }}</h3>
+						    {%- else %}
+							<h3><a href="{{ fellow.url }}">{{ fellow.title }}</a></h3>
+						    {%- endif %}
+						    {%- if fellow.affiliation %}
+							<p><strong>{{ fellow.affiliation }}</strong></p>
+						    {%- endif %}
+						    <p>{{ fellow.short_bio }}</p>
+						</div>
+					    </div>
+					{%- endfor %}
+				    </div>
+				{%- endfor %}
+			    </div>
+			</div>
+		{%- endfor %}
+		<div class='sponsorship'>
+		    <div class="container page-content">
+			<div class='row'>
+			    <div class='col-md-9'>
+				<p>		    <strong>The BSSw Fellowship is sponsored by the U.S. Department of Energy and National Science Foundation.</strong>
+				</p>
+			    </div>
+			    <div class='fellow'>
+				<div class='col'>
+				    <div class="img_div">
+					<img src="/images/Logo_DOE_Unofficial_Sm.png" class="logo"> 
+				    </div>  
+				    <div class="img_div">
+					<img src="/images/Logo_NSF_4ColorB_Sm.png" class="logo"> 
+				    </div>  
+				</div>
+			    </div>
+			</div>
+		    </div>
+		</div>
+	    </div>
+</div>

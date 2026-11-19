@@ -1,0 +1,39 @@
+{%- comment -%}
+  Rails pages/_deck: page title + snippet, plus the orientation / fellows /
+  contribute sub-menus. `p` is the page document (defaults to `page`).
+{%- endcomment -%}
+{%- assign p = include.page | default: page -%}
+{%- if p.deck and p.slug != "resources" %}
+
+    <div class="hero {% if p.slug == 'better-scientific-software-bssw' %} home-hero {% endif %}">
+	<div class="container">
+	    <div class="row">
+		<div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
+		    <h1>{{ p.title }}</h1>
+		    <p>{{ p.deck | markdownify | strip }}</p>
+		</div>
+	    </div>
+            <div class="row">
+		<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+		    {%- for menu in site.data.menus %}
+		    {%- if menu.pages contains p.slug or menu.extra contains p.slug %}
+			<ul class="list-inline"{% if menu.id %} id="{{ menu.id }}"{% endif %}>
+			    {%- for slug in menu.pages %}
+			    {%- assign m = site.site_pages | where: "slug", slug | first %}
+<li class='list-inline-item
+{% if slug == p.slug %} inactive{% endif %}
+'>
+  <a href="{{ m.url }}">{{ menu.labels[slug] | default: m.title }}</a>
+</li>
+			    {%- endfor %}
+			</ul>
+		    {%- endif %}
+		    {%- endfor %}
+
+		</div>
+
+	    </div>
+	</div>
+    </div>
+
+{%- endif %}

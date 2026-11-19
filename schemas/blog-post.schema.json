@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bssw.io/schemas/blog-post.schema.json",
+  "title": "BSSw blog post front matter",
+  "description": "YAML front matter for _posts/YYYY-MM-DD-<slug>.md and _drafts/<slug>.md. Topic, track and author values are slugs; vocabularies are served at /api/taxonomy.json and /api/authors.json.",
+  "type": "object",
+  "required": ["title", "authors", "deck", "topics"],
+  "additionalProperties": true,
+  "properties": {
+    "title": { "type": "string", "minLength": 1, "description": "Post title (H1)." },
+    "slug": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$", "description": "URL slug: /blog_posts/<slug>. Defaults to the parameterized title." },
+    "date": { "type": "string", "format": "date", "description": "Publication date (YYYY-MM-DD). Drafts may omit it." },
+    "authors": {
+      "type": "array", "minItems": 1, "uniqueItems": true,
+      "items": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+      "description": "Keys of _data/authors.yml, in byline order."
+    },
+    "deck": { "type": "string", "minLength": 1, "description": "One-paragraph summary (Markdown inline). Shown under the title, in listings, and in social cards." },
+    "topics": {
+      "type": "array", "minItems": 1, "uniqueItems": true,
+      "items": { "type": "string" },
+      "description": "Topic slugs from /api/taxonomy.json (categories[].topics[].slug). Order is display order."
+    },
+    "tracks": {
+      "type": "array", "uniqueItems": true,
+      "items": { "type": "string" },
+      "description": "Blog track slugs from /api/taxonomy.json (tracks[].slug)."
+    },
+    "hero_image": { "type": "string", "pattern": "^/images/", "description": "Optional hero image under /images/. When set, the deck moves into the body." },
+    "hero_image_alt": { "type": "string" },
+    "hero_image_caption": { "type": "string" },
+    "rss_date": { "type": "string", "format": "date", "description": "Re-surface the post in the RSS feed on this date." },
+    "published": { "type": "boolean", "description": "false hides a post in _posts without deleting it." },
+    "legacy_path": { "type": "string", "description": "Source path in the legacy content repo (set by scripts/import_legacy.rb)." }
+  }
+}

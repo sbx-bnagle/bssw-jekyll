@@ -1,0 +1,9 @@
+---
+layout: default
+title: Contact BSSw
+permalink: /contact
+---
+{%- comment -%} Rails contacts#new {%- endcomment -%}
+{%- assign p = site.site_pages | where: "slug", "contact-bssw" | first -%}
+{% include hero.html page=p %}
+{% include contact_form.html %}

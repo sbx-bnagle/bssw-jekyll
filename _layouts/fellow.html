@@ -1,0 +1,63 @@
+---
+layout: default
+---
+{%- comment -%} Rails fellows/show {%- endcomment -%}
+<div class="main post-event-hero fellows-hero">
+  <div class="container">
+    <div class="row">
+      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+	<div class="page-heading">
+	  <div class="row">
+	    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+	      <div class="breadcrumbs">
+		<ul>
+		  <li><a href="/">Home</a></li>
+		  <li><a href="/pages/meet-our-fellows">Fellows</a></li>
+		  <li class="active">{{ page.title }}</li>
+		</ul>
+	      </div>
+	    </div>
+	  </div>
+	  <h1>{{ page.title }}</h1>
+	  <div class='row'>
+	    <div class='col-xl-3 col-lg-3 col-md-5 col-sm-12 col-12'>
+	      {%- if page.image %}
+		         <img class="fellows-photo" src="{{ page.image | relative_url }}" />
+	      {%- endif %}
+	    </div>
+	    <div class='col-xl-8 col-lg-8 col-md-7 col-sm-12 col-12'>
+	      <div class="fellows-info">
+		<div class="fellows-info-inner">
+		  {%- if page.affiliation %}
+		  <p class="mb-0"><strong>Affiliation:</strong> {{ page.affiliation }}</p>
+		  {%- endif %}
+		  {%- if page.website %}
+		  <p><strong>URL:</strong> <a href="{{ page.website }}">{{ page.website }}</a></p>
+		  {%- endif %}
+		  {%- if page.linkedin %}
+		  <p class="offsite mb-0 pb-0"><a class="pb-0" href="{{ page.linkedin }}">LinkedIn</a></p>
+		  {%- endif %}
+		  {%- if page.github %}
+		  <p class="offsite mt-0"><a href="{{ page.github }}">GitHub</a></p>
+		  {%- endif %}
+		</div>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="page-content event-content fellows-content">
+  <div class="container">
+    <div class='row'>
+      <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
+	<div class="content">
+	  <p></p>{%- comment -%} left by Rails after stripping "**Long Bio:**" {%- endcomment %}
+	  {{ content }}
+	</div>
+      </div>
+    </div>
+  </div>
+</div>

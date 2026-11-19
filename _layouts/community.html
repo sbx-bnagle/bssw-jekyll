@@ -1,0 +1,58 @@
+---
+layout: default
+---
+{%- comment -%} Rails communities/show {%- endcomment -%}
+<div class="main post-event-hero single-post-hero">
+  <div class="container">
+    <div class="row">
+      <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
+        <div class="page-heading">
+          <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+              <div class="breadcrumbs">
+                <ul>
+                  <li><a href="/">Home</a></li>
+                  <li><a href="/pages/communities-overview">Communities</a></li>
+                  <li class="active">{{ page.title | rails_crumb: 90 }}</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <h1>{{ page.title }}</h1>
+          <div class="post-content">
+            <p>{{ page.deck | markdownify | strip }} </p>
+            <p class='learn-more'><a href="/pages/communities-overview">Learn More About Communities</a> </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="page-content post-event-content">
+  <div class="container">
+    <div class='row'>
+      <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
+        <div class="content">
+          {{ content }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="blog-post-footer">
+  <div class="container">
+    <div class="row">
+      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+  <div class="row">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+      <h1>Featured Resources for the {{ page.title }}</h1>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+      {%- for ref in page.featured %}
+      {%- include find_doc.html url=ref %}
+      {%- if found_doc %}{% include resource_row.html item=found_doc community=true %}{% endif %}
+      {%- endfor %}
+</div>

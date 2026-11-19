@@ -1,0 +1,85 @@
+---
+layout: default
+title: BSSw Blog
+slug: bssw-blog
+permalink: /blog_posts/
+scripts: [/assets/js/listing.js]
+---
+{%- comment -%} Rails blog_posts#index. ?track=<slug> is applied by listing.js. {%- endcomment -%}
+{%- assign blog = site.site_pages | where: "slug", "bssw-blog" | first -%}
+{% include hero.html page=blog %}
+    <div class='page-content
+		 blog-content'>
+	<div class='container'>
+	    <div class='row'>
+		<div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
+		    <div class='content '>
+			{{ blog.content }}
+		    </div>
+		</div>
+	    </div>
+	</div>
+    </div>
+<div class="sub-nav-container blog-sub-nav">
+  <div class="container">
+    <ul class="nav justify-content-end">
+      <li class="nav-item">
+        <a class="nav-link email-digest" href="/pages/receive-our-email-digest">Subscribe To Our Email Digest</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link rss-feed" href="/resources.rss">Follow Our RSS Feed</a>
+      </li>
+    </ul>
+  </div>
+</div>
+  <div class="posts-list" id="posts">
+    {%- for post in site.posts %}
+    {% include post_row.html post=post data=true %}
+    {%- endfor %}
+    <div class="row"></div>
+</div>
+<div class='row bottom-event-blog-row'>
+  <div class='container more-top'>
+  </div>
+  <div class="posts-list to-top-after-load">
+    <div class="container">
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-nd-12 col-sm-12 col-12">
+          <a class="to-top" href="#top">To Top</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{%- assign first = site.posts | first %}
+{%- if first.hero_image %}
+<style type="text/css">
+ #posts .event-blog-row:first-of-type a
+ {
+   background:
+   linear-gradient(
+      rgba(52, 157, 255, 0.5), 
+      rgba(52, 157, 255, 0.5)
+    ),
+    /* bottom, image */
+    url({{ first.hero_image | relative_url }}) no-repeat center top;
+    background-size: cover;
+ }
+ #posts .event-blog-row:first-of-type a:hover {
+    background:#18187d;
+    transition: none;
+ }
+</style>
+{%- else %}
+<style>
+   #posts .event-blog-rows:first-of-type a {
+      background:#18187d;
+   }
+   #posts .event-blog-row:first-of-type a:hover {
+      background: #3366cc;
+      transition: none;
+   }
+  </style>
+{%- endif %}
+<script type="application/json" id="bssw-data">{"items":[],"authors":{},"categories":[],"tracks":{{ site.data.tracks | jsonify }}}</script>
+<script>document.body.setAttribute('data-listing', 'blog');</script>

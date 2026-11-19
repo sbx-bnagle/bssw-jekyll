@@ -1,0 +1,24 @@
+{%- comment -%} Rails resources/index.rss.builder: latest 15 by coalesce(rss_date, date). {%- endcomment -%}
+{%- assign all_docs = site.posts | concat: site.items | concat: site.events -%}
+{%- assign keyed = "" | split: "" -%}
+{%- for d in all_docs -%}{%- assign k = d.rss_date | default: d.date | date: "%Y-%m-%d" -%}{%- capture key %}{{ k }}|{{ d.slug }}{% endcapture -%}{%- assign keyed = keyed | push: key -%}{%- endfor -%}
+{%- assign keyed = keyed | sort | reverse -%}
+<?xml version="1.0"?>
+<rss version="2.0">
+  <channel>
+    <title>BSSw Resource Feed</title>
+    <description>All Resources</description>
+    <link>{{ "/items" | absolute_url }}</link>
+    {%- for key in keyed limit: 15 %}
+    {%- assign slug = key | split: "|" | last %}{% include find_doc.html slug=slug %}{% assign d = found_doc %}
+    {%- assign rss_date = d.rss_date | default: d.date %}
+    <item>
+      <title>{{ d.title | xml_escape }}</title>
+      <description><![CDATA[{{ d.content }}]]></description>
+      <pubDate>{{ rss_date | date_to_rfc822 }}</pubDate>
+      <link>{{ "/items/" | append: d.slug | absolute_url }}</link>
+      <guid>{{ d.slug }}{{ rss_date | date: "%Y-%m-%d" }}</guid>
+    </item>
+    {%- endfor %}
+  </channel>
+</rss>

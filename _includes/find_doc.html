@@ -1,0 +1,8 @@
+{%- comment -%}
+  Sets `found_doc` to the post/item/event matching include.url (any of
+  /items/<slug>, /blog_posts/<slug>, /events/<slug>) or bare include.slug.
+{%- endcomment -%}
+{%- assign found_doc = nil -%}
+{%- assign want = include.slug | default: include.url | split: "/" | last -%}
+{%- assign all_docs = site.posts | concat: site.items | concat: site.events -%}
+{%- for d in all_docs -%}{%- if d.slug == want -%}{%- assign found_doc = d -%}{%- break -%}{%- endif -%}{%- endfor -%}

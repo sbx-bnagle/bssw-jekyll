@@ -1,0 +1,6 @@
+---
+layout: null
+permalink: /api/taxonomy.json
+---
+{%- comment -%} Topic/category/track vocabularies for editor pickers and validation. {%- endcomment -%}
+{"categories":{{ site.data.categories | jsonify }},"tracks":{{ site.data.tracks | jsonify }}}

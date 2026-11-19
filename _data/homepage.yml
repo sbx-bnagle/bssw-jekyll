@@ -1,0 +1,15 @@
+# Homepage carousel ("Featured"). Each slide pairs two documents, referenced
+# by their URL. Mirrors the Slide<N> L/R comment block in Site/Homepage.md.
+featured:
+  - [/blog_posts/issues-as-source-code, /blog_posts/advancing-research-software-through-global-collaboration-highlights-from-irsc26]
+  - [/items/how-the-claude-code-team-does-code-review, /items/tips-to-sustain-your-software-beyond-the-life-of-your-job-or-project]
+  - [/events/sc26-software-related-events, /blog_posts/applications-open-for-the-2027-bssw-fellowship-program]
+  - [/blog_posts/using-local-ai-to-support-reproducibility-and-sustainability-in-scientific-software, /blog_posts/the-better-scientific-software-fellowship-at-pearc-26]
+
+# Rotating footer quote on the homepage (Site/Quotes.md). One is picked per build.
+quotes:
+  - { text: "We should forget about small efficiencies, say about 97% of the time: premature optimization is the root of all evil. Yet we should not pass up our opportunities in that critical 3%.", author: "Donald Knuth" }
+  - { text: "Any fool can write code that a computer can understand. Good programmers write code that humans can understand.", author: "Martin Fowler" }
+  - { text: "Give me six hours to chop down a tree and I will spend the first four sharpening the axe.", author: "Abraham Lincoln" }
+  - { text: "The function of good software is to make the complex appear to be simple.", author: "Grady Booch" }
+  - { text: "The key to performance is elegance, not battalions of special cases.", author: "Jon Bentley and Doug McIlroy" }

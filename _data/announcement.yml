@@ -1,0 +1,6 @@
+# Site-wide announcement bar. Displayed while the build date is between
+# start and end (inclusive). Leave `text` empty to disable.
+text: "Applications are open for the 2027 BSSw Fellowship Program ... Deadline October 30"
+url: /items/applications-open-for-the-2027-bssw-fellowship-program
+start: 2026-09-01
+end: 2026-10-30

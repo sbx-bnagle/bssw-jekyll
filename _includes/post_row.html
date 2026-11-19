@@ -1,0 +1,27 @@
+{%- comment -%} Rails blog_posts/_post {%- endcomment -%}
+{%- assign post = include.post -%}
+<div class="event-blog-row"{% if include.data %} data-tracks="{{ post.tracks | join: ' ' }}"{% endif %}>
+  <div class="container">
+    <a href="{{ post.url }}">
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+          <h3>{{ post.title }}</h3>
+	{%- unless include.hide_tracks %}
+	{%- if post.tracks and post.tracks.size > 0 %}
+	<h4>{% for t in post.tracks %}{% assign track = site.data.tracks | where: "slug", t | first %}{{ track.name | default: t }}{% if forloop.length == 2 and forloop.first %} and {% elsif forloop.length > 2 and forloop.rindex == 2 %}, and {% elsif forloop.rindex > 2 %}, {% endif %}{% endfor %}
+	</h4>
+	{%- endif %}
+	{%- endunless %}
+        </div>
+      </div>
+      <div class="row">
+      	<div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12">
+          <p class='small-caps'><strong>Published</strong> {{ post.date | date: "%b %d, %Y" }}</p>
+	</div>
+	<div class="col-xl-8 col-lg-8 col-md-12 col-sm-12 col-12">
+          <p class='small-caps'>{% include author_list.html authors=post.authors links=false %}</p>
+	</div>
+      </div>
+    </a>
+  </div>
+</div>

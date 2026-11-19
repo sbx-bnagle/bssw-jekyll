@@ -1,0 +1,68 @@
+---
+layout: default
+title: Upcoming Events
+slug: upcoming-events
+permalink: /events/
+scripts: [/assets/js/listing.js]
+---
+{%- comment -%}
+  Rails events#index. Upcoming/past are split at build time (site.time), so
+  the site should rebuild daily (see .github/workflows/pages.yml);
+  ?past=true is switched by listing.js.
+{%- endcomment -%}
+{%- assign today = site.time | date: "%Y-%m-%d" -%}
+{%- assign up_keys = "" | split: "" -%}
+{%- assign past_keys = "" | split: "" -%}
+{%- for ev in site.events -%}
+  {%- assign up_done = false -%}{%- assign last_past = "" -%}
+  {%- for d in ev.dates -%}
+    {%- assign s = d.start | date: "%Y-%m-%d" -%}{%- assign e = d.end | default: d.start | date: "%Y-%m-%d" -%}
+    {%- if e >= today and up_done == false -%}
+      {%- if s >= today -%}{%- assign k = s -%}{%- else -%}{%- assign k = e -%}{%- endif -%}
+      {%- capture key %}{{ k }}|{{ ev.slug }}|{{ forloop.index0 }}{% endcapture -%}
+      {%- assign up_keys = up_keys | push: key -%}{%- assign up_done = true -%}
+    {%- endif -%}
+    {%- if s < today -%}{%- capture last_past %}{{ s }}|{{ ev.slug }}|{{ forloop.index0 }}{% endcapture -%}{%- endif -%}
+  {%- endfor -%}
+  {%- if last_past != "" -%}{%- assign past_keys = past_keys | push: last_past -%}{%- endif -%}
+{%- endfor -%}
+{%- assign up_keys = up_keys | sort -%}
+{%- assign past_keys = past_keys | sort | reverse -%}
+{%- assign upcoming_page = site.site_pages | where: "slug", "upcoming-events" | first -%}
+{%- assign past_page = site.site_pages | where: "slug", "past-events" | first -%}
+{% include hero.html page=upcoming_page %}
+<template id="events-past-hero">{% include hero.html page=past_page %}</template>
+<div class="container">
+	<div class="sub-nav-container events-sub-nav">
+	    <ul class="nav justify-content-end">
+		    <li class="nav-item">
+			<a class="nav-link" href="/events?past=true">View Past Events</a>
+		    </li>
+	    </ul>
+	</div>
+</div>
+<div id='events'>
+    {%- for key in up_keys %}
+    {%- assign parts = key | split: "|" %}{% assign ev = site.events | where: "slug", parts[1] | first %}{% assign i = parts[2] | plus: 0 %}{% assign ev_date = ev.dates[i] %}
+    {% include event_row.html event=ev date=ev_date %}
+    {%- endfor %}
+</div>
+<template id="events-past-rows">
+    {%- for key in past_keys %}
+    {%- assign parts = key | split: "|" %}{% assign ev = site.events | where: "slug", parts[1] | first %}{% assign i = parts[2] | plus: 0 %}{% assign ev_date = ev.dates[i] %}
+    {% include event_row.html event=ev date=ev_date %}
+    {%- endfor %}
+</template>
+<div class="bottom-event-blog-row">
+    <div class="container more-top">
+	<div class="row">
+	    <div class="col-xl-12">
+		<span id="more">
+		</span>
+		<a class="to-top" href="#top">To Top</a>
+	    </div>
+	</div>
+    </div>
+</div>
+<script type="application/json" id="bssw-data">{"items":[],"authors":{},"categories":[],"tracks":[]}</script>
+<script>document.body.setAttribute('data-listing', 'events');</script>

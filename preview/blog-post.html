@@ -1,0 +1,17 @@
+---
+layout: blog_post
+title: Untitled draft
+slug: untitled-draft
+date: 2026-01-01
+authors: []
+deck: "Draft summary."
+topics: []
+tracks: []
+permalink: /preview/blog-post
+noindex: true
+sitemap: false
+scripts: [/assets/js/preview-bridge.js]
+---
+<p><em>Preview frame for the contributor editor. Content arrives via postMessage; see docs/EDITOR_INTEGRATION.md.</em></p>
+{% include site_json.html %}
+<script>document.body.setAttribute('data-preview-origins', '{{ site.preview_allowed_origins | jsonify }}');</script>

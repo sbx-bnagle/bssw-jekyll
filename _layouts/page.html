@@ -1,0 +1,74 @@
+---
+layout: default
+---
+{%- comment -%} Rails pages/show -> pages/_page (+ per-page extras). {%- endcomment -%}
+{%- assign p = include.page | default: page -%}
+{% include hero.html page=page %}
+
+{%- unless page.hide_content %}
+    <div class='page-content
+		{% if page.slug == 'better-scientific-software-bssw' %} home-content{% endif %}
+		{% if page.slug == 'bssw-blog' %} blog-content{% endif %}
+		{% if page.slug == 'bssw-fellowship-program' %} fellowship-content{% endif %}
+		{% if page.slug == 'contributors' %} contributors-content{% endif %}
+		{% if page.slug == 'team' %} about-content{% endif %}
+		{% if page.slug == 'policies' %} policies-content{% endif %}
+		{% if page.slug == 'contribute-to-the-better-scientific-software-site' %} contributions-content{% endif %}
+		{% if page.title contains 'Email' %} email-content{% endif %}'>
+	<div class='container'>
+	    <div class='row'>
+		<div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
+		    <div class='content {% if page.slug == 'communities-overview' %}communities-overview{% endif %}'>
+			{%- if page.staff %}
+			{%- assign team_parts = content | split: '<h2 id="partners">Partners</h2>' %}
+			{{ team_parts | first }}
+		    </div>
+		</div>
+	    </div>
+	</div>
+		    <div class="container mt-2">
+			<h2>BSSw Editorial Team</h2>
+			<div class="limiter team">
+			    <div class="row">
+				{%- for person in page.staff %}
+<div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-12">
+    <div class='author-col'>
+	{%- if person.avatar %}
+	    <img class="fellows-photo" src="{{ person.avatar }}" />
+	{%- else %}
+	    <img src="/images/People_BSSwContributor.png" class="fellows-photo" />
+	{%- endif %}
+	<h3>
+	    {{ person.name }}
+	</h3>
+	<p>
+		<strong>{% if person.title %}{{ person.title }}{% else %}{{ person.section | replace: "Editors", "Editor" }}{% endif %}</strong>
+	</p>
+	    <p class='affiliation'>{{ person.affiliation }}</p>
+    </div>
+</div>
+				{%- endfor %}
+			    </div>
+			</div>
+
+			<h2 id='partners'>Partners</h2>
+			{{ team_parts | last }}
+		    </div>
+    </div>
+			{%- else %}
+			{{ content }}
+			{%- if page.title contains 'Email' %}
+			    {% include email_signup.html %}
+			{%- endif %}
+		    </div>
+		</div>
+	    </div>
+	</div>
+    </div>
+			{%- endif %}
+{%- endunless %}
+{%- if page.slug == 'questions-about-contributing-to-better-scientific-software' %}
+    {% include contact_form.html contribute=true %}
+{%- elsif page.slug == 'meet-our-fellows' %}
+    {% include fellows_grid.html %}
+{%- endif %}

@@ -1,0 +1,116 @@
+# Contributors. Key = slug used in front matter `authors:` lists.
+# `github` lets the editor match a signed-in contributor to their entry.
+---
+suzan-anwar:
+  name: Suzan Anwar
+  github: szuananwar
+  website: https://github.com/szuananwar
+  avatar: https://avatars.githubusercontent.com/u/76664109
+  sort_name: Anwar
+michelle-barker:
+  name: Michelle Barker
+  website: https://www.linkedin.com/in/michelledbarker
+  sort_name: Barker
+roscoe-a-bartlett:
+  name: Roscoe A. Bartlett
+  github: bartlettroscoe
+  website: https://github.com/bartlettroscoe
+  avatar: https://avatars.githubusercontent.com/u/1959736
+  affiliation: Sandia National Laboratories
+  sort_name: Bartlett
+keith-beattie:
+  name: Keith Beattie
+  github: ksbeattie
+  website: https://github.com/ksbeattie/
+  avatar: https://avatars.githubusercontent.com/u/1534843
+  affiliation: LBL
+  sort_name: Beattie
+david-e-bernholdt:
+  name: David E. Bernholdt
+  github: bernhold
+  website: https://github.com/bernhold
+  avatar: https://avatars.githubusercontent.com/u/426409
+  affiliation: Oak Ridge National Laboratory
+  sort_name: Bernholdt
+elsa-gonsiorowski:
+  name: Elsa Gonsiorowski
+  github: gonsie
+  website: https://github.com/gonsie
+  avatar: https://avatars.githubusercontent.com/u/135808
+  affiliation: "@LLNL"
+  sort_name: Gonsiorowski
+patricia-grubel:
+  name: Patricia Grubel
+  github: pagrubel
+  website: https://github.com/pagrubel
+  avatar: https://avatars.githubusercontent.com/u/2473171
+  affiliation: Los Alamos National Laboratory @lanl
+  sort_name: Grubel
+rinku-gupta:
+  name: Rinku Gupta
+  github: rinkug
+  website: https://github.com/rinkug
+  avatar: https://avatars.githubusercontent.com/u/768870
+  affiliation: Argonne National Laboratory
+  sort_name: Gupta
+kim-hartley:
+  name: Kim Hartley
+  github: kim-hartley
+  website: https://github.com/kim-hartley
+  avatar: https://avatars.githubusercontent.com/u/101290958
+  sort_name: Hartley
+rebecca-hartman-baker:
+  name: Rebecca Hartman-Baker
+  github: hartmanbaker
+  website: https://github.com/hartmanbaker
+  avatar: https://avatars.githubusercontent.com/u/7650505
+  affiliation: "@NERSC"
+  sort_name: Hartman-Baker
+michael-a-heroux:
+  name: Michael A. Heroux
+  github: maherou
+  website: https://github.com/maherou
+  avatar: https://avatars.githubusercontent.com/u/1021003
+  affiliation: ParaTools, Inc; St. John's University, MN; HPE; Hyperion
+  sort_name: Heroux
+adam-lavely:
+  name: Adam Lavely
+  github: adamlavely
+  website: https://github.com/adamlavely
+  avatar: https://avatars.githubusercontent.com/u/3373143
+  affiliation: LBNL NERSC
+  sort_name: Lavely
+lois-curfman-mcinnes:
+  name: Lois Curfman McInnes
+  github: curfman
+  website: https://github.com/curfman
+  avatar: https://avatars.githubusercontent.com/u/786325
+  affiliation: Argonne National Laboratory
+  sort_name: McInnes
+mark-c-miller:
+  name: Mark C. Miller
+  github: markcmiller86
+  website: https://github.com/markcmiller86
+  avatar: https://avatars.githubusercontent.com/u/5720676
+  affiliation: "@LLNL"
+  sort_name: Miller
+suzanne-parete-koon:
+  name: Suzanne Parete-Koon
+  github: suzannepk
+  website: https://github.com/suzannepk
+  avatar: https://avatars.githubusercontent.com/u/4682047
+  affiliation: OLCF
+  sort_name: Parete-Koon
+jason-sarich:
+  name: Jason Sarich
+  github: sarich
+  website: https://github.com/sarich
+  avatar: https://avatars.githubusercontent.com/u/4931514
+  affiliation: Argonne National Laboratory
+  sort_name: Sarich
+samuel-storey:
+  name: Samuel Storey
+  github: sstorey4
+  website: https://github.com/sstorey4
+  avatar: https://avatars.githubusercontent.com/u/338954002
+  sort_name: Storey

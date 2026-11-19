@@ -1,0 +1,17 @@
+{%- comment -%} Rails events/_events row. `include.date` = the dates entry to show. {%- endcomment -%}
+{%- assign event = include.event -%}{%- assign d = include.date -%}
+	<div class="event-blog-row">
+	    <div class="container">
+		<a href="{{ event.url }}">
+		    <div class="row">
+			<div class="col-xl-8 order-xl-last col-lg-8 order-lg-last col-md-12 col-sm-12 col-12">
+			    <h3>{{ event.title }}</h3>
+			</div>
+			<div class="col-xl-4 order-xl-first col-lg-4 order-lg-first col-md-12 col-sm-12 col-12">
+			    <h3>{% include date_range.html start=d.start end=d.end %}</h3>
+			    <p class="small-caps date">{{ d.label }}</p>
+			</div>
+		    </div>
+		</a>
+	    </div>
+	</div>

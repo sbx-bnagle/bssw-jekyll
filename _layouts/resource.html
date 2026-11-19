@@ -1,0 +1,63 @@
+---
+layout: default
+wide_footer: true
+---
+{%- comment -%} Rails resources/show {%- endcomment -%}
+<div class="main event-hero post-event-hero single-item-hero">
+    <div class="container">
+	<div class="row">
+	    <div class="col-xl-9 col-lg-9 col-md-9 col-sm-12 col-12">
+		<div class="page-heading all">
+		    <div class="row">
+			<div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
+			    {% include breadcrumbs.html %}
+	      		</div>
+			<div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12">
+			    {% include share.html %}
+			</div>
+		    </div>
+		    <div class="row">
+			<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+			    <h1>{{ page.title }}</h1>
+			    <div class="row details-row">
+				<div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-6">
+				    <h3 class="small-caps">
+					<!--<strong>Date</strong>-->{{ page.date | date: "%b %d, %Y" }}</h3>
+				</div>
+				<div class="col-xl-9 col-lg-9 col-md-6 col-sm-6 col-6">
+				    <h3 class="small-caps">
+					<strong>Author{% if page.authors.size > 1 %}s{% endif %}</strong>{% include author_list.html authors=page.authors %}
+				    </h3>
+				</div>
+			    </div>
+			    <div class="post-content">
+				<p>{{ page.deck | markdownify | strip }}</p>
+			    </div>
+			    {% include topics.html topics=page.topics %}
+			</div>
+		    </div>
+		</div>
+	    </div>
+	    {% include sidebar.html %}
+	</div>
+    </div>
+</div>
+<div class="page-content single-item-content">
+    <div class="container">
+	<div class="row">
+	    <div class="col-xl-3 offset-xl-9 col-lg-3 offset-lg-9 col-md-3 offset-md-9 col-sm-12 col-12">
+		<!-- Fake Sidebar -->
+		<div class="faux-sidebar"></div>
+	    </div>
+	</div>
+    </div>
+    <div class="container">
+	<div class='row'>
+	    <div class="col-xl-9 col-lg-9 col-md-9 col-sm-12 col-12">
+		<div class="content">
+		    {{ content }}
+		</div>
+	    </div>
+	</div>
+    </div>
+</div>

@@ -1,0 +1,14 @@
+{%- comment -%}
+  Rails SiteItem#author_list: linked names joined with Array#to_sentence.
+  include.links=false -> "<strong>By </strong>Name, Name, and Name" (listing rows).
+{%- endcomment -%}
+{%- assign slugs = include.authors -%}
+{%- if include.links == false %}<strong>By </strong>{% endif -%}
+{%- if slugs == nil or slugs.size == 0 -%}BSSw Community{%- else -%}
+{%- for slug in slugs -%}
+  {%- assign a = site.data.authors[slug] -%}
+  {%- assign name = a.name | default: slug -%}
+  {%- if include.links == false -%}{{ name }}{%- else -%}<a class='author' href='/items?author={{ slug }}'>{{ name }}</a>{%- endif -%}
+  {%- if forloop.length == 2 and forloop.first %} and {% elsif forloop.length > 2 and forloop.rindex == 2 %}, and {% elsif forloop.rindex > 2 %}, {% endif -%}
+{%- endfor -%}
+{%- endif -%}

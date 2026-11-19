@@ -1,0 +1,6 @@
+---
+layout: null
+permalink: /api/authors.json
+---
+{%- comment -%} Contributors keyed by slug; `github` maps a signed-in GitHub user to an entry. {%- endcomment -%}
+{{ site.data.authors | jsonify }}
