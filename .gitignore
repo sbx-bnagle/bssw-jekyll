@@ -8,3 +8,5 @@ _config.pages.yml
 node_modules/
 editor/dist/
 editor/.env.local
+editor/.wrangler-home/
+editor/.wrangler/

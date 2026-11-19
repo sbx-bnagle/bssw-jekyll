@@ -75,4 +75,5 @@ exclude:
 # contributor editor). Keep the editor on its own origin; see
 # docs/EDITOR_INTEGRATION.md.
 preview_allowed_origins:
-  - http://localhost:5173
+  - https://bssw-editor.bssw-editor.workers.dev   # deployed editor (editor/wrangler.jsonc)
+  - http://localhost:5173                         # editor dev server

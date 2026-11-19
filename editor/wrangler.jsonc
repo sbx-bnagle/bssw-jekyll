@@ -1,0 +1,13 @@
+// Deploy: npm run deploy (builds dist/, then deploys with the project-local
+// Cloudflare login in .wrangler-home/; sign in once with `npm run cf:login`).
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "bssw-editor",
+  "main": "worker/index.js",
+  "compatibility_date": "2026-11-01",
+  "assets": { "directory": "./dist", "binding": "ASSETS" },
+  "vars": {
+    // Public OAuth App client ID (must match VITE_GITHUB_CLIENT_ID in .env.production).
+    "GITHUB_CLIENT_ID": ""
+  }
+}

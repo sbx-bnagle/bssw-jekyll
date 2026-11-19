@@ -9,7 +9,11 @@
     "build": "tsc --noEmit && vite build",
     "preview": "vite preview",
     "typecheck": "tsc --noEmit",
-    "test": "node test/parity.mjs && node test/sync.test.mjs"
+    "test": "node test/parity.mjs && node test/sync.test.mjs",
+    "deploy": "npm run build && XDG_CONFIG_HOME=$PWD/.wrangler-home wrangler deploy",
+    "cf:login": "XDG_CONFIG_HOME=$PWD/.wrangler-home wrangler login",
+    "cf:whoami": "XDG_CONFIG_HOME=$PWD/.wrangler-home wrangler whoami",
+    "cf:secret": "XDG_CONFIG_HOME=$PWD/.wrangler-home wrangler secret put GITHUB_CLIENT_SECRET"
   },
   "dependencies": {
     "@codemirror/commands": "^6.11.1",
@@ -27,6 +31,7 @@
     "@types/node": "^26.6.6",
     "esbuild": "^0.25.12",
     "typescript": "^5.9.3",
-    "vite": "^6.4.6"
+    "vite": "^6.4.6",
+    "wrangler": "^4.165.0"
   }
 }

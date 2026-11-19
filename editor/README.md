@@ -27,12 +27,35 @@ autosave in the browser, and the preview uses the site set in `VITE_SITE_URL`.
 
 Exchanging the OAuth code for a token needs the client secret, so it can't
 happen in the browser. In development the Vite server handles it
-(`vite.config.ts` → `server/exchange.js`). In production, deploy
-`worker/auth-worker.js` (Cloudflare Worker; see `worker/wrangler.toml.example`)
-and point `VITE_AUTH_URL` at it.
+(`vite.config.ts` → `server/exchange.js`); in production the editor's own
+Worker does (see Deploy). A GitHub OAuth App has one callback URL, so local
+development needs its own OAuth App with the `localhost` callback.
 
 The token has the `public_repo` scope and is kept in this origin's
 localStorage until the contributor signs out.
+
+## Deploy
+
+Live at **https://bssw-editor.bssw-editor.workers.dev**: one Cloudflare
+Worker (`worker/index.js`, `wrangler.jsonc`) serves the built editor and the
+token exchange at `/api/auth/token`, on an origin separate from the site.
+
+```bash
+npm run cf:login    # once: Cloudflare sign-in, stored in .wrangler-home/ (this project only)
+npm run cf:secret   # once: paste the OAuth App's client secret
+npm run deploy      # build + deploy
+```
+
+- Public build settings are in `.env.production` (client ID, content repo,
+  site URL). The client ID also goes in `wrangler.jsonc` → `vars`.
+- The production OAuth App's homepage and callback URL are the editor's
+  address (with a trailing `/` for the callback).
+- The site must list the editor's origin in `preview_allowed_origins`
+  (`../_config.yml`), or the preview frame won't respond.
+- `public/_headers` sets the editor's security headers (CSP, no framing,
+  no referrer). If the site moves, update `frame-src`.
+- `worker/auth-worker.js` is an alternative: a standalone token-exchange
+  Worker for hosting the editor's static files elsewhere.
 
 ## How it works
 
