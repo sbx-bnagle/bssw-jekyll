@@ -1,0 +1,50 @@
+[
+  {
+    "id": "figure",
+    "label": "Figure",
+    "description": "An image with an optional caption. Full-width figures open in a lightbox when clicked.",
+    "include": "components/figure.html",
+    "inline": true,
+    "fields": [
+      { "name": "src", "label": "Image", "type": "image", "required": true, "help": "Path under /images/, or upload a file." },
+      { "name": "alt", "label": "Alt text", "type": "text", "required": true, "help": "Describe the image for screen readers." },
+      { "name": "caption", "label": "Caption", "type": "text", "help": "Shown under the image, e.g. \"Figure 1. ...\"" },
+      { "name": "style", "label": "Size", "type": "select", "default": "page",
+        "options": [ { "value": "page", "label": "Full width" }, { "value": "logo", "label": "Small (logo or headshot)" } ] },
+      { "name": "lightbox", "label": "Click to enlarge", "type": "checkbox", "default": "true", "showIf": { "style": "page" } }
+    ]
+  },
+  {
+    "id": "profile-card",
+    "label": "Profile card",
+    "description": "Photo and short bio, as used for BSSw Fellows. Put a \"### Name\" heading above it.",
+    "include": "components/profile-card.html",
+    "inline": false,
+    "fields": [
+      { "name": "photo", "label": "Photo", "type": "image", "required": true },
+      { "name": "bio", "label": "Short bio", "type": "textarea", "required": true }
+    ]
+  },
+  {
+    "id": "link-row",
+    "label": "Link row",
+    "description": "A full-width bordered link, for \"Selected resources\" lists.",
+    "include": "components/link-row.html",
+    "inline": false,
+    "fields": [
+      { "name": "url", "label": "URL", "type": "url", "required": true },
+      { "name": "text", "label": "Link text", "type": "text", "required": true }
+    ]
+  },
+  {
+    "id": "collapsible",
+    "label": "Collapsible section",
+    "description": "A section readers can expand. The body is ordinary Markdown in the editor.",
+    "include": "components/collapsible.html",
+    "inline": false,
+    "fields": [
+      { "name": "summary", "label": "Heading", "type": "text", "required": true },
+      { "name": "body", "label": "Body", "type": "markdown", "required": true }
+    ]
+  }
+]

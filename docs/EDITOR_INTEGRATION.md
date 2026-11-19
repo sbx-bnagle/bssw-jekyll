@@ -1,8 +1,9 @@
 # Contributor editor: integration points
 
-This is the planned standalone Markdown editor: contributors sign in with
-GitHub, write a blog post, switch between Markdown and a preview, and save
-drafts. This page lists what the Jekyll site already provides for it.
+The editor lives in [`editor/`](../editor/README.md). Contributors sign in
+with GitHub, write a blog post, insert components through forms, switch
+between Markdown and a preview, and save drafts. This page describes the
+site-side contract the editor relies on.
 
 ## 1. Content model
 
@@ -53,7 +54,7 @@ contributor's token.
 with the site's CSS, fonts and JS. Embed it and send it the draft:
 
 ```html
-<iframe id="preview" src="https://bssw.io/preview/blog-post" sandbox="allow-scripts"></iframe>
+<iframe id="preview" src="https://bssw.io/preview/blog-post" sandbox="allow-scripts allow-same-origin allow-popups"></iframe>
 ```
 
 ```js
@@ -74,14 +75,35 @@ preview.contentWindow.postMessage({
 The frame posts `{type: 'bssw:preview-ready'}` when it loads, and
 `{type: 'bssw:preview-rendered', height}` after each render, so the editor can
 resize the iframe. The frame only accepts messages from origins listed in
-`preview_allowed_origins` in `_config.yml`. Leave out `allow-same-origin` on
-the iframe: the frame then runs in an opaque origin, so draft HTML cannot
-reach anything stored on the site's origin.
+`preview_allowed_origins` in `_config.yml`. Serve the editor from a different
+origin than the site. `allow-same-origin` then gives the frame the site's
+origin, which the Font Awesome CDN needs before it will serve the icon fonts,
+and draft HTML in the frame still can't touch the editor's storage (where the
+GitHub token lives).
 
 The bridge runs `BSSWContent.enhance()` on the content, so lightbox images and
 `[caption]` text appear the same way as on the published site.
 
-## 4. Markdown parity
+## 4. Components
+
+Reusable blog components are Jekyll includes in `_includes/components/`. They
+output the same markup legacy posts used, so they pick up the existing
+styles:
+
+| Component | Include | Legacy markup it replaces |
+| --- | --- | --- |
+| Figure | `figure.html` | `<img class='page lightbox'>[Caption]` |
+| Profile card | `profile-card.html` | `<div class='fellow'>…` (fellowship posts) |
+| Link row | `link-row.html` | `<a class="link-row">` |
+| Collapsible section | `collapsible.html` | `<details>` with a heading summary |
+
+Their form fields are described in `_data/components.json`, which both Jekyll
+(`site.data.components`) and the editor read. `/preview/components` shows
+every component. The editor renders the include files with LiquidJS, so the
+build and the preview use the same templates; `editor/test/parity.mjs` checks
+that they match.
+
+## 5. Markdown parity
 
 The site renders Markdown with **Redcarpet**, using the same options as the
 Rails app: `autolink`, `tables`, `lax_spacing`, `strikethrough`,

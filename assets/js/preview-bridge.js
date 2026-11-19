@@ -8,7 +8,8 @@
  *   iframe.contentWindow.postMessage({
  *     type: 'bssw:preview',
  *     post: { title, date, authors: [slug], deck_html, topics: [slug],
- *             tracks: [slug], hero_image, hero_image_caption, body_html }
+ *             tracks: [slug], hero_image, hero_image_caption, body_html,
+ *             authors_data: { slug: {name} } }   // optional, for new authors
  *   }, 'https://bssw.io');
  *
  * The frame answers {type:'bssw:preview-ready'} on load and
@@ -96,6 +97,8 @@
   }
 
   function render(post) {
+    // Authors added in the draft branch aren't in this build's data yet.
+    if (post.authors_data) Object.keys(post.authors_data).forEach(function (k) { DATA.authors[k] = post.authors_data[k]; });
     var heading = document.querySelector('.page-heading');
     heading.querySelector('h1').textContent = post.title || 'Untitled draft';
     heading.querySelector('.breadcrumbs li.active').textContent = '        ' + crumb(post.title || 'Untitled draft');

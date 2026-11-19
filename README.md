@@ -32,7 +32,9 @@ bundle exec jekyll serve --drafts # also shows _drafts/
 | `assets/js/listing.js` | Client-side `?topic=` `?category=` `?recent=` `?author=` `?track=` `?past=` and search | `resources#index`, `#search` |
 | `assets/js/bssw-content.js` | Lightbox and `[caption]` handling for content images | `MarkdownUtility.update_images` |
 | `_plugins/` | Redcarpet Markdown (same options as Rails), `/items/<slug>` aliases, Rails helper filters | `GithubImporter`, helpers |
-| `api/`, `schemas/`, `preview/` | JSON data, front-matter schema, preview frame for the contributor editor | (new) |
+| `api/`, `schemas/`, `preview/` | JSON data, front-matter schema, preview frame and component reference for the editor | (new) |
+| `_includes/components/`, `_data/components.json` | Blog components (figure, profile card, link row, collapsible) and their editor fields | raw HTML in posts |
+| `editor/` | Contributor editor (Vite app): GitHub sign-in, component forms, Markdown/preview switch. See `editor/README.md` | (new) |
 
 ## Importing more content
 

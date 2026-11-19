@@ -1,0 +1,10 @@
+# Copy to wrangler.toml, then:
+#   npx wrangler secret put GITHUB_CLIENT_SECRET
+#   npx wrangler deploy
+name = "bssw-editor-auth"
+main = "auth-worker.js"
+compatibility_date = "2026-11-01"
+
+[vars]
+GITHUB_CLIENT_ID = ""
+ALLOWED_ORIGINS = "https://editor.example.org"

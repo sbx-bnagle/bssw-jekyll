@@ -1,0 +1,12 @@
+{%- comment -%}
+  Figure: an image with an optional caption. Same markup as legacy posts:
+    <img src='/images/x.png' class='page lightbox' alt="..."/>[Caption]
+  bssw-content.js turns "[Caption]" into span.caption and wraps .lightbox
+  images in a lightbox link.
+  Params: src (required), alt, caption, style ("page" | "logo"), lightbox ("true" | "false")
+  (Not "size": include.size is Liquid's built-in hash size.)
+{%- endcomment -%}
+{%- assign fig_style = include.style | default: "page" -%}
+{%- assign fig_class = fig_style -%}
+{%- if fig_style == "page" and include.lightbox != "false" -%}{%- assign fig_class = "page lightbox" -%}{%- endif -%}
+<img src='{{ include.src }}' class='{{ fig_class }}' alt="{{ include.alt }}"/>{% if include.caption and include.caption != "" %}[{{ include.caption }}]{% endif %}

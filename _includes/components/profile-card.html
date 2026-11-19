@@ -1,0 +1,13 @@
+{%- comment -%}
+  Profile card (photo + short bio), as used for BSSw Fellows in blog posts.
+  Usually follows a "### Name" heading.
+  Redcarpet ends an HTML block at the first line ending in </div> (it doesn't
+  track nesting), so only the outer </div> may end a line. The empty <p>
+  matches the DOM bssw.io produces for the legacy markup.
+  Params: photo (required), bio (required)
+{%- endcomment %}
+<div class='fellow'>
+<div class='img_div'><img src='{{ include.photo }}' class='logo' /></div><div class='short_bio'>
+  <p>{{ include.bio }}</p>
+</div><p></p>
+</div>

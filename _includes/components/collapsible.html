@@ -1,0 +1,14 @@
+{%- comment -%}
+  Collapsible section with an H2-styled summary.
+  The body is Markdown, captured just before the include:
+    {% capture collapsible_body %}...Markdown...{% endcapture %}
+    {% include components/collapsible.html summary="Title" body=collapsible_body %}
+  Params: summary (required), body (required, Markdown)
+{%- endcomment %}
+<details>
+<summary><h2 style="display:inline;">{{ include.summary }}</h2></summary>
+{{ include.body | markdownify | strip | replace: "
+
+", "
+" }}
+</details>

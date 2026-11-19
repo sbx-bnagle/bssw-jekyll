@@ -5,3 +5,6 @@ _site/
 vendor/
 .bundle/
 _config.pages.yml
+node_modules/
+editor/dist/
+editor/.env.local
